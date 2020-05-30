@@ -1,32 +1,21 @@
 {
   "name": "project-5",
-  "version": "1.0.0",
-  "description": "Project-5",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node app",
+    "dev": "nodemon app"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ragini-sonar/Project-5.git"
-  },
-  "keywords": [
-    "js",
-    "nodejs",
-    "express",
-    "mysql",
-    "jquery",
-    "api"
-  ],
-  "author": "Ragini Sonar and Aline Campos",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ragini-sonar/Project-5/issues"
-  },
-  "homepage": "https://github.com/ragini-sonar/Project-5#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4"
   }
 }
