@@ -1,35 +1,40 @@
 <div style="margin-top: 30px">
     <h1 class="text-center mb-5"> {{title}}</h1>
-
-
 </div>
 
+<div class="input-group mb-5 ">
+    <input type="text" class="form-control" placeholder="Search for a movie..." aria-label="Search for a movie...">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+    <div class="dropdown show row justify-content-center ">
+        <a class="btn btn-secondary dropdown-toggle ml-5" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Genre
+        </a>
 
-<div class="dropdown text-center mb-5">
-    <input class="mr-3" type="text" placeholder="Search for a movie...">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Genre
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Comedy</a>
-        <a class="dropdown-item" href="#">Drama</a>
-        <a class="dropdown-item" href="#">Thriller</a>
-        <a class="dropdown-item" href="#">Romance</a>
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Fantasy</a>
-        <a class="dropdown-item" href="#">Mystery</a>
-        <a class="dropdown-item" href="#">Horror</a>
-        <a class="dropdown-item" href="#">Scy-Fi</a>
-        <a class="dropdown-item" href="#">Family</a>
-        <a class="dropdown-item" href="#">Sport</a>
-        <a class="dropdown-item" href="#">History</a>
-        <a class="dropdown-item" href="#">Adventure</a>
-        <a class="dropdown-item" href="#">War</a>
-        <a class="dropdown-item" href="#">Crime</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Comedy</a>
+            <a class="dropdown-item" href="#">Drama</a>
+            <a class="dropdown-item" href="#">Thriller</a>
+            <a class="dropdown-item" href="#">Romance</a>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Fantasy</a>
+            <a class="dropdown-item" href="#">Mystery</a>
+            <a class="dropdown-item" href="#">Horror</a>
+            <a class="dropdown-item" href="#">Scy-Fi</a>
+            <a class="dropdown-item" href="#">Family</a>
+            <a class="dropdown-item" href="#">Sport</a>
+            <a class="dropdown-item" href="#">History</a>
+            <a class="dropdown-item" href="#">Adventure</a>
+            <a class="dropdown-item" href="#">War</a>
+            <a class="dropdown-item" href="#">Crime</a>
+
+        </div>
     </div>
 </div>
 
+
 <div id="movie-container">
-    <div id="movies"></div>
+    <div class="row align-items-start" id="movies"></div>
 </div>
