@@ -7,11 +7,7 @@ $(document).ready(function () {
     success: function (data) {
       $.each(data.data.movies, function (i, movie) {
         $movies.append(
-          '<tr><td><img src="' +
-            movie.medium_cover_image +
-            '"></td><td>' +
-            movie.title +
-            "</td></tr>"
+          ('<tr><td><a href="/details/'+movie.id+'"><img src="' +movie.medium_cover_image +'"></a></td><td><a href="/details/'+movie.id+'">'+movie.title+'</a></td></tr>')
         );
       });
     },
@@ -26,12 +22,8 @@ $(document).ready(function () {
         $movies.empty();
         $.each(data.data.movies, function (i, movie) {
           $movies.append(
-            '<tr><td><img src="' +
-              movie.medium_cover_image +
-              '"></td><td>' +
-              movie.title +
-              "</td></tr>"
-          );
+              ('<tr><td><a href="/details/'+movie.id+'"><img src="' +movie.medium_cover_image +'"></a></td><td><a href="/details/'+movie.id+'">'+movie.title+'</a></td></tr>')
+            );
         });
       },
     });
@@ -46,14 +38,13 @@ $(document).ready(function () {
         $movies.empty();
         $.each(data.data.movies, function (i, movie) {
           $movies.append(
-            '<tr><td><img src="' +
-              movie.medium_cover_image +
-              '"></td><td>' +
-              movie.title +
-              "</td></tr>"
-          );
+              ('<tr><td><a href="/details/'+movie.id+'"><img src="' +movie.medium_cover_image +'"></a></td><td><a href="/details/'+movie.id+'">'+movie.title+'</a></td></tr>')
+            );
         });
       },
     });
   });
+
 });
+
+
