@@ -4,11 +4,30 @@ const models = require("../db/models");
 
 /* GET home page. */
 router.get("/", function (req, res) {
-  res.render("home", { title: "Pathé Gaumont cinemas" });
+  res.render("home");
 });
 
 router.get("/login", (req, res) => {
   res.render("login");
+});
+
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  models.User.registeredUser(email, password, res)
+    .then(function (result) {
+      if (result) {
+        console.log("login successful");
+        res.redirect("/");
+      } else {
+        res.render("login");
+      }
+    })
+    .catch((msg) => {
+      res.render("registration", {
+        messageClass: "alert-danger",
+        message: msg,
+      });
+    });
 });
 
 router.get("/registration", (req, res) => {

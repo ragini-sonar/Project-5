@@ -30,4 +30,21 @@ module.exports.User = {
       });
     });
   },
+
+  registeredUser: (email, pwd, res) => {
+    let sql = "SELECT password FROM users WHERE email = ?";
+    return new Promise(function (resolve, reject) {
+      con.query(sql, [email], function (err, result) {
+        if (result.length > 0) {
+          if (result[0].password == pwd) {
+            resolve(result);
+          } else {
+            return res.status(401).redirect("/login");
+          }
+        } else {
+          reject("Please register first");
+        }
+      });
+    });
+  },
 };
