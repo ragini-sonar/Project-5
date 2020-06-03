@@ -22,7 +22,11 @@
             </div>
         </nav>
 
-
+        {{#if message}}
+        <div class="alert {{messageClass}} mt-4" role="alert">
+            {{message}}
+        </div>
+        {{/if}}
 
         {{{body}}}
 

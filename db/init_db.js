@@ -12,7 +12,6 @@ module.exports = function () {
 
   // connect to database
   con.connect(function (err) {
-    console.log("inside con.connect");
     if (err) {
       console.log("Error connecting Data base... ");
     } else {
@@ -26,6 +25,7 @@ module.exports = function () {
         console.log("User table Connected");
       });
 
+      // create rating table
       let sql2 =
         "CREATE TABLE if not exists ratings (id int AUTO_INCREMENT, movie_id VARCHAR(255), rating INT, user_id int, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES users (user_id))";
       con.query(sql2, function (err, result) {
