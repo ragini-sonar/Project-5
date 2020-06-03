@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var $movies = $("#movies");
+  var $movie_id = $(".movie_id");
 
   $.ajax({
     method: "GET",
@@ -7,7 +8,15 @@ $(document).ready(function () {
     success: function (data) {
       $.each(data.data.movies, function (i, movie) {
         $movies.append(
-          ('<tr><td><a href="/details/'+movie.id+'"><img src="' +movie.medium_cover_image +'"></a></td><td><a href="/details/'+movie.id+'">'+movie.title+'</a></td></tr>')
+          '<tr><td><a href="/details/' +
+            movie.id +
+            '"><img src="' +
+            movie.medium_cover_image +
+            '"></a></td><td><a href="/details/' +
+            movie.id +
+            '">' +
+            movie.title +
+            "</a></td></tr>"
         );
       });
     },
@@ -22,8 +31,16 @@ $(document).ready(function () {
         $movies.empty();
         $.each(data.data.movies, function (i, movie) {
           $movies.append(
-              ('<tr><td><a href="/details/'+movie.id+'"><img src="' +movie.medium_cover_image +'"></a></td><td><a href="/details/'+movie.id+'">'+movie.title+'</a></td></tr>')
-            );
+            '<tr><td><a href="/details/' +
+              movie.id +
+              '"><img src="' +
+              movie.medium_cover_image +
+              '"></a></td><td><a href="/details/' +
+              movie.id +
+              '">' +
+              movie.title +
+              "</a></td></tr>"
+          );
         });
       },
     });
@@ -38,13 +55,39 @@ $(document).ready(function () {
         $movies.empty();
         $.each(data.data.movies, function (i, movie) {
           $movies.append(
-              ('<tr><td><a href="/details/'+movie.id+'"><img src="' +movie.medium_cover_image +'"></a></td><td><a href="/details/'+movie.id+'">'+movie.title+'</a></td></tr>')
-            );
+            '<tr><td><a href="/details/' +
+              movie.id +
+              '"><img src="' +
+              movie.medium_cover_image +
+              '"></a></td><td><a href="/details/' +
+              movie.id +
+              '">' +
+              movie.title +
+              "</a></td></tr>"
+          );
         });
       },
     });
   });
 
+  $.ajax({
+    method: "GET",
+    url:
+      "https://yts.mx/api/v2/movie_details.json?movie_id=" +
+      $movie_id.attr("id"),
+    success: function (data) {
+      var movieData = data.data.movie;
+      $movie_id.append(
+        '<tr><td><img src="' +
+          movieData.medium_cover_image +
+          '"></td><td><p>' +
+          movieData.title +
+          "</p><br><p>" +
+          movieData.year +
+          "</p><br><p>" +
+          movieData.description_intro +
+          "</p><br></td></tr>"
+      );
+    },
+  });
 });
-
-

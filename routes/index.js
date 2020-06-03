@@ -7,11 +7,18 @@ router.get("/", function (req, res) {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login")
+  res.render("login");
 });
 
 router.get("/registration", (req, res) => {
-  res.render("registration")
+  res.render("registration");
+});
+
+router.get("/details/:id", function (req, res) {
+  const { id } = req.params;
+  res.render("details", {
+    movieId: id,
+  });
 });
 
 module.exports = router;
