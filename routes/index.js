@@ -13,10 +13,11 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
-  models.User.registeredUser(email, password, res)
-    .then(function (result) {
-      if (result) {
+  models.User.userLogin(email, password)
+    .then(function (auth_token) {
+      if (auth_token) {
         console.log("login successful");
+        res.cookie("AuthToken", auth_token);
         res.redirect("/");
       } else {
         res.render("login");
@@ -56,6 +57,11 @@ router.get("/details/:id", function (req, res) {
   res.render("details", {
     movieId: id,
   });
+});
+
+router.get("/logout", (req, res) => {
+  unsetAuthToken(req, res);
+  res.redirect("/");
 });
 
 module.exports = router;

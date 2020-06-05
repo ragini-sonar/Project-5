@@ -3,6 +3,8 @@ const path = require("path");
 const Router = require("./routes/index");
 const db = require("./db/init_db");
 const hbs = require("express-handlebars");
+const auth = require("./routes/auth.js");
+const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 8000;
 
@@ -22,6 +24,16 @@ app.engine(
 
 app.set("view engine", "hbs");
 app.set("views", "views");
+
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+  // Get auth token from the cookies
+  const authToken = req.cookies["AuthToken"];
+  // Inject the user id into req.user
+  req.user = auth.getSessionUser(authToken);
+  next();
+});
 
 //app.set("views", path.join(__dirname, "views"));
 
