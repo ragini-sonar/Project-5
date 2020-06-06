@@ -27,9 +27,26 @@ $(document).ready(function () {
   });
 
   $("#submit").on("click", function () {
+    saveToDatabase();
     console.log(ratedIndex);
   });
 });
+
+function saveToDatabase() {
+  $.ajax({
+    url: "/saverating",
+    type: "POST",
+    dataType: "json",
+    containtType: "application/json; charset=utf-8",
+    data: {
+      movie_id: $(".movie_id").attr("id"),
+      rating: ratedIndex,
+    },
+    success: function (res) {
+      console.log("success in savetodatabasefunction");
+    },
+  });
+}
 
 function reSetStarColor() {
   $(".fa-star").css("color", "black");

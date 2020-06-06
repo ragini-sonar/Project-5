@@ -1,6 +1,4 @@
 const express = require("express");
-const path = require("path");
-const Router = require("./routes/index");
 const db = require("./db/init_db");
 const hbs = require("express-handlebars");
 const auth = require("./routes/auth.js");
@@ -41,6 +39,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("Ajax"));
 
-app.use(Router);
+app.use(require("./routes"));
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`));

@@ -53,4 +53,33 @@ module.exports.User = {
       });
     });
   },
+
+  insertRating: (movieId, ratedIndex, userId) => {
+    var found = false;
+    let sql = "SELECT movie_id FROM ratings where user_id = ?";
+    return new Promise(function (resolve, reject) {
+      con.query(sql, [userId], function (err, result) {
+        if (err) throw err;
+        // if user id is not in rating table()
+        if (result[0].movie_id != undefined) {
+          for (var record in result) {
+            if (result[record].movie_id == movieId) {
+              found = true;
+            }
+          }
+        }
+        // if user has not reted the movie already
+        if (!found) {
+          let sql1 = "INSERT INTO ratings SET ? ";
+          let post = { movie_id: movieId, rating: ratedIndex, user_id: userId };
+          con.query(sql1, post, (err, res1) => {
+            if (err) throw err;
+            resolve();
+          });
+        } else {
+          reject();
+        }
+      });
+    });
+  },
 };

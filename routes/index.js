@@ -1,10 +1,13 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const models = require("../db/models");
+const { requireAuth, setAuthToken, unsetAuthToken } = require("./auth");
 
 /* GET home page. */
 router.get("/", function (req, res) {
-  res.render("home");
+  res.render("home", {
+    user: req.user,
+  });
 });
 
 router.get("/login", (req, res) => {
@@ -31,6 +34,11 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.get("/logout", (req, res) => {
+  unsetAuthToken(req.cookies["AuthToken"]);
+  res.redirect("/");
+});
+
 router.get("/registration", (req, res) => {
   res.render("registration");
 });
@@ -55,13 +63,29 @@ router.post("/registration", (req, res) => {
 router.get("/details/:id", function (req, res) {
   const { id } = req.params;
   res.render("details", {
+    user: req.user,
     movieId: id,
   });
 });
 
-router.get("/logout", (req, res) => {
-  unsetAuthToken(req, res);
-  res.redirect("/");
+router.post("/saverating", requireAuth, (req, res) => {
+  const { movie_id, rating } = req.body;
+  console.log("user found: ", req.user);
+  models.User.insertRating(movie_id, rating, req.user)
+    .then(function (result) {
+      console.log("back to save rating", result);
+      res.render("details", {
+        messageClass: "alert-success",
+        message: "Summited rating.",
+      });
+    })
+    .catch((msg) => {
+      console.log("back to save rating 1");
+      res.render("login", {
+        messageClass: "alert-danger",
+        message: "Already rated.",
+      });
+    });
 });
 
 module.exports = router;
