@@ -61,7 +61,7 @@ module.exports.User = {
       con.query(sql, [userId], function (err, result) {
         if (err) throw err;
         // if user id is not in rating table()
-        if (result[0].movie_id != undefined) {
+        if (result != undefined) {
           for (var record in result) {
             if (result[record].movie_id == movieId) {
               found = true;
