@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   $("#submit").on("click", function () {
     saveToDatabase();
-    console.log(ratedIndex);
+    console.log("saved to databse", ratedIndex);
   });
 });
 
@@ -36,14 +36,16 @@ function saveToDatabase() {
   $.ajax({
     url: "/saverating",
     type: "POST",
-    dataType: "json",
-    containtType: "application/json; charset=utf-8",
     data: {
       movie_id: $(".movie_id").attr("id"),
       rating: ratedIndex,
     },
-    success: function (res) {
-      console.log("success in savetodatabasefunction");
+    success: function (data) {
+      document.getElementById("detail-container").innerHTML = data.message;
+    },
+    error: function (data) {
+      document.getElementsByClassName("container").innerHTML =
+        data.responseText;
     },
   });
 }

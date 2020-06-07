@@ -74,14 +74,14 @@ router.post("/saverating", requireAuth, (req, res) => {
   models.User.insertRating(movie_id, rating, req.user)
     .then(function (result) {
       console.log("back to save rating", result);
-      res.render("details", {
+      res.send({
         messageClass: "alert-success",
         message: "Summited rating.",
       });
     })
     .catch((msg) => {
       console.log("back to save rating 1");
-      res.render("login", {
+      res.send({
         messageClass: "alert-danger",
         message: "Already rated.",
       });
