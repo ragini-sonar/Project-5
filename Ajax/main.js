@@ -2,6 +2,7 @@ $(document).ready(function () {
   var $movies = $("#movies");
   var $movie_id = $(".movie_id");
 
+  // display homepage
   $.ajax({
     method: "GET",
     url: "https://yts.mx/api/v2/list_movies.json",
@@ -22,6 +23,7 @@ $(document).ready(function () {
     },
   });
 
+  // genre dropdown
   $("#select").change(function () {
     var genre = $("#select").val();
     $.ajax({
@@ -46,6 +48,7 @@ $(document).ready(function () {
     });
   });
 
+  // search bar
   $("#searchMovie").on("keyup", function (e) {
     let title = e.target.value;
     $.ajax({
@@ -70,6 +73,7 @@ $(document).ready(function () {
     });
   });
 
+  // display details page
   $.ajax({
     method: "GET",
     url:

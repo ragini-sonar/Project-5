@@ -3,7 +3,6 @@ const router = express.Router();
 const models = require("../db/models");
 const { requireAuth, setAuthToken, unsetAuthToken } = require("./auth");
 
-/* GET home page. */
 router.get("/", function (req, res) {
   res.render("home", {
     user: req.user,
@@ -19,7 +18,6 @@ router.post("/login", (req, res) => {
   models.User.userLogin(email, password)
     .then(function (auth_token) {
       if (auth_token) {
-        console.log("login successful");
         res.cookie("AuthToken", auth_token);
         res.redirect("/");
       } else {
@@ -29,7 +27,7 @@ router.post("/login", (req, res) => {
     .catch((msg) => {
       res.render("registration", {
         messageClass: "alert-danger",
-        message: msg,
+        message: "Please register first",
       });
     });
 });
@@ -68,22 +66,20 @@ router.get("/details/:id", function (req, res) {
   });
 });
 
+// insert rating to database
 router.post("/saverating", requireAuth, (req, res) => {
   const { movie_id, rating } = req.body;
-  console.log("user found: ", req.user);
   models.User.insertRating(movie_id, rating, req.user)
     .then(function (result) {
-      console.log("back to save rating", result);
       res.send({
         messageClass: "alert-success",
-        message: "Summited rating.",
+        message: "Your rating is submitted successfully ✅",
       });
     })
     .catch((msg) => {
-      console.log("back to save rating 1");
       res.send({
         messageClass: "alert-danger",
-        message: "Already rated.",
+        message: "❌ You have already rated this movie!",
       });
     });
 });

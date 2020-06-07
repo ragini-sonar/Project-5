@@ -21,12 +21,10 @@ module.exports.User = {
               resolve(result);
             });
           } else {
-            // throw "Password should match";
             reject();
           }
         } else {
           if (result.length > 0) {
-            //throw "User already registered";
             reject();
           }
         }
@@ -47,8 +45,7 @@ module.exports.User = {
             return;
           }
         } else {
-          console.log("user not found");
-          reject("Please register first");
+          reject();
         }
       });
     });
@@ -79,6 +76,18 @@ module.exports.User = {
         } else {
           reject();
         }
+      });
+    });
+  },
+
+  //getting average rating and users
+  avgRating: (movie_id) => {
+    let sql =
+      "SELECT AVG(rating), COUNT(movie_id) FROM ratings WHERE movie_id = ?";
+    return new Promise(function (resolve, reject) {
+      con.query(sql, [movie_id], function (err, result) {
+        if (err) throw err;
+        console.log(result);
       });
     });
   },

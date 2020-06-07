@@ -3,10 +3,12 @@ var ratedIndex = 0;
 $(document).ready(function () {
   reSetStarColor();
 
+  // rating stars
   $(".fa-star").on("click", function () {
     ratedIndex = parseInt($(this).attr("data-index"));
   });
 
+  // mouseover the stars
   $(".fa-star").mouseover(function () {
     reSetStarColor();
     var currentIndex = parseInt($(this).attr("data-index"));
@@ -16,6 +18,7 @@ $(document).ready(function () {
     }
   });
 
+  // mouseleave the stars
   $(".fa-star").mouseleave(function () {
     reSetStarColor();
 
@@ -26,12 +29,14 @@ $(document).ready(function () {
     }
   });
 
+  // submit the rating
   $("#submit").on("click", function () {
     saveToDatabase();
     console.log("saved to databse", ratedIndex);
   });
 });
 
+// insert rating to database through /saverating
 function saveToDatabase() {
   $.ajax({
     url: "/saverating",
@@ -50,6 +55,7 @@ function saveToDatabase() {
   });
 }
 
+// reset stars to black
 function reSetStarColor() {
   $(".fa-star").css("color", "black");
 }

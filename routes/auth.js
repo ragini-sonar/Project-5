@@ -32,7 +32,7 @@ module.exports = {
     if (req.user) {
       next();
     } else {
-      return res.status(401).redirect("/login");
+      return res.send({ message: "Please login to rate the movie." });
     }
   },
 };
