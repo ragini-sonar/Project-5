@@ -87,8 +87,9 @@ module.exports.User = {
     return new Promise(function (resolve, reject) {
       con.query(sql, [movie_id], function (err, result) {
         if (err) throw err;
-        console.log(result);
+        resolve(result);
       });
     });
+    reject();
   },
 };

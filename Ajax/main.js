@@ -94,4 +94,23 @@ $(document).ready(function () {
       );
     },
   });
+
+  // printing average rating
+  $.ajax({
+    url: "/averageRating/" + $movie_id.attr("id"),
+    method: "GET",
+    processData: false,
+    success: function (data) {
+      document.getElementById("average").innerHTML =
+        "Average rating: " +
+        data.avgRating +
+        "/5" +
+        " 🎞️ " +
+        "Total Ratings: " +
+        data.nRatings;
+    },
+    error: function () {
+      console.log("error found");
+    },
+  });
 });

@@ -84,4 +84,26 @@ router.post("/saverating", requireAuth, (req, res) => {
     });
 });
 
+router.get("/averageRating/:id", (req, res) => {
+  const { id } = req.params;
+
+  models.User.avgRating(id)
+    .then(function (result) {
+      var x = result[0]["AVG(rating)"];
+      if (x == null) {
+        x = 0;
+      }
+      res.send({
+        avgRating: x,
+        nRatings: result[0]["COUNT(movie_id)"],
+      });
+    })
+    .catch((err) => {
+      res.send({
+        avgRating: "No average Rating",
+        nRatings: "No Ratings",
+      });
+    });
+});
+
 module.exports = router;
