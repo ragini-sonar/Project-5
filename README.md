@@ -1,2 +1,2 @@
 # Project-5
-api project
+Movie Rating App
